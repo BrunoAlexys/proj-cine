@@ -9,46 +9,35 @@ import br.com.cine.model.validation.ValidarUsuario;
 public class UsuarioService {
 	private UsuarioRepository usuarioRepository;
 
-    public UsuarioService() {
-        this.usuarioRepository = new UsuarioRepository();
-    }
+	public UsuarioService() {
+		this.usuarioRepository = new UsuarioRepository();
+	}
 
-    public void cadastrarUsuario(Usuario usuario) throws Exception, SQLException {
-        //Optional<Usuario> usuarioExistente = buscarUsuarioPorEmail(usuario.getEmail());
+	public void cadastrarUsuario(Usuario usuario) throws Exception, SQLException {
 
-//        if (usuarioExistente.isPresent()) {
-//            throw new IllegalArgumentException("Não foi possível cadastrar o usuário com esse email!");
-//        }
+		String senhaHash = EncriptarSenha.encriptarSenha(usuario.getSenha());
+		usuario.setSenha(senhaHash);
+		ValidarUsuario.validarUsuario(usuario);
+		usuarioRepository.cadastrarUsuario(usuario);
+	}
 
-        String senhaHash = EncriptarSenha.encriptarSenha(usuario.getSenha());
-        usuario.setSenha(senhaHash);
-        ValidarUsuario.validarUsuario(usuario);
-        usuarioRepository.cadastrarUsuario(usuario);
-    }
+	public Optional<Usuario> buscarUsuarioPorEmailESenha(String email, String senha) throws Exception, SQLException {
+		ValidarUsuario.validarEmailESenha(email, senha);
+		return usuarioRepository.buscarUsuarioPorEmailESenha(email, senha);
+	}
 
-    public Optional<Usuario> buscarUsuarioPorEmailESenha(String email, String senha) throws Exception,SQLException {      
-        ValidarUsuario.validarEmailESenha(email, senha);
-        return usuarioRepository.buscarUsuarioPorEmailESenha(email, senha);
-    }
+	public Optional<Usuario> buscarUsuarioPorID(Long id) throws SQLException {
+		return usuarioRepository.buscarUsuarioPeloID(id);
+	}
 
-//    public Optional<Usuario> buscarUsuarioPorEmail(String email) throws SQLException {
-//        return usuarioRepository.buscarUsuarioPorEmail(email);
-//    }
+	public void alterarUsuario(Usuario usuario) throws Exception {
+		String senhaHash = EncriptarSenha.encriptarSenha(usuario.getSenha());
+		usuario.setSenha(senhaHash);
+		ValidarUsuario.validarUsuario(usuario);
+		usuarioRepository.alterarUsuario(usuario);
+	}
 
-    public Optional<Usuario> buscarUsuarioPorID(Long id) throws SQLException{
-        return usuarioRepository.buscarUsuarioPeloID(id);
-    }
-
-    public void alterarUsuario(Usuario usuario) throws Exception {
-        String senhaHash = EncriptarSenha.encriptarSenha(usuario.getSenha());
-        usuario.setSenha(senhaHash);
-        ValidarUsuario.validarUsuario(usuario);
-        usuarioRepository.alterarUsuario(usuario);
-    }
-
-    public void excluirUsuario(Long id) throws SQLException {
-        usuarioRepository.excluirUsuarioPeloId(id);
-    }
+	public void excluirUsuario(Long id) throws SQLException {
+		usuarioRepository.excluirUsuarioPeloId(id);
+	}
 }
-
-
