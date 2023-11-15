@@ -4,7 +4,7 @@ import br.com.cine.model.entities.Usuario;
 import br.com.cine.model.repository.UsuarioRepository;
 
 public class ValidarUsuario {
-	
+
 	private UsuarioRepository repository;
 
 	public ValidarUsuario() {
@@ -37,5 +37,3 @@ public class ValidarUsuario {
 		return true;
 	}
 }
-
-
