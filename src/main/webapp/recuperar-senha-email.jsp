@@ -16,7 +16,7 @@
       <h1>Informe seu Email</h1>
       <span>Esqueceu a senha?</span>
       <input type="email" id="emailInput" name="email" placeholder="Email" required="required"/>
-      <a href="cine?action=LoginFormBean">Cancelar</a>
+      <a href="cine?action=LoginFormBean">Voltar</a>
       <button type="submit">Enviar</button>
     </form>
   </div>

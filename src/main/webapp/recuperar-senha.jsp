@@ -10,14 +10,14 @@
 <body>
 	<div class="container" id="container">
       <div class="form-container sign-in-container">
-        <form action="#" method="post" id="resetForm">
+        <form action="cine?action=LoginFormBean" method="post" id="resetForm" onsubmit="return validateSenha();">
           <h1>Redefinir senha</h1>
 
           <label for="password">Nova senha</label>
           <input type="password" id="newPassword" placeholder="Password" required="required"/>
           <label for="password">Confirmar senha</label>
           <input type="password" id="confirmPassword" placeholder="Password" required="required"/>
-          <a href="cine?action=RecuperarSenhaEmailBean">Cancelar</a>
+          <a href="cine?action=LoginFormBean">Cancelar</a>
           <button type="submit" id="resetButton">Redefinir</button>
         </form>
       </div>

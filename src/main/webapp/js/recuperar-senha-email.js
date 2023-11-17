@@ -1,7 +1,7 @@
- function validateForm() {
+function validateForm() {
     var email = document.getElementById('emailInput').value;
 
-    if (email === null) {
+    if (email === "") {
       alert('Por favor, preencha o campo de e-mail.');
       return false; // Impede o envio do formulário
     }
@@ -11,5 +11,5 @@
 
     // Retorne false para impedir o envio do formulário
     return false;
-  }
+ }
   
