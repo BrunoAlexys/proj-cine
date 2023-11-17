@@ -1,147 +1,39 @@
 package br.com.cine.model.entities;
+
 import java.time.LocalDate;
-import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 
 @Entity
 @Table(name = "filmes")
-public class Filmes {
+@DiscriminatorValue("FILME")
+public class Filmes extends Conteudo {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "filmes_id")
-	private Long id;
-	@Column(name = "titulo")
-	private String titulo;
-	@Column(name = "descricao")
-	private String descricao;
 	@Column(name = "duracao")
-	private Double duracao;
-	@Column(name = "diretor")
-	private String diretor;
-	@Column(name = "data_lancamento")
-	private LocalDate dataDeLancamento;
-	@Column(name = "genero")
-	private String genero;
-	@Column(name = "url_img")
-	private String urlImg;
-	@Column(name = "url_trailer")
-	private String urlTrailer;
-	@Column(name = "ativo")
-	private Boolean ativo;
+	private Integer duracao;
 
-	@OneToMany(mappedBy = "filmes")
-	private List<Avaliacoes> listAvaliacoes;
-
-	public Filmes(String titulo, String descricao, Double duracao, String diretor, LocalDate dataDeLancamento,
-			String genero, String urlImg, String urlTrailer) {
-		this.titulo = titulo;
-		this.descricao = descricao;
+	public Filmes(String titulo, String descricao, String diretor, String genero, LocalDate dataDeLancamento,
+			String urlImg, String urlTrailer, Integer duracao) {
+		super(titulo, descricao, diretor, genero, dataDeLancamento, urlImg, urlTrailer);
 		this.duracao = duracao;
-		this.diretor = diretor;
-		this.dataDeLancamento = dataDeLancamento;
-		this.genero = genero;
-		this.urlImg = urlImg;
-		this.urlTrailer = urlTrailer;
-		this.ativo = true;
 	}
 
-	public Filmes() {
-	}
+	public Filmes() {}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getTitulo() {
-		return titulo;
-	}
-
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public Double getDuracao() {
+	public Integer getDuracao() {
 		return duracao;
 	}
 
-	public void setDuracao(Double duracao) {
+	public void setDuracao(Integer duracao) {
 		this.duracao = duracao;
 	}
 
-	public String getDiretor() {
-		return diretor;
+	@Override
+	protected String definirTipoConteudo() {
+		return "Filmes";
 	}
 
-	public void setDiretor(String diretor) {
-		this.diretor = diretor;
-	}
-
-	public LocalDate getDataDeLancamento() {
-		return dataDeLancamento;
-	}
-
-	public void setDataDeLancamento(LocalDate dataDeLancamento) {
-		this.dataDeLancamento = dataDeLancamento;
-	}
-
-	public String getGenero() {
-		return genero;
-	}
-
-	public void setGenero(String genero) {
-		this.genero = genero;
-	}
-
-	public String getUrlImg() {
-		return urlImg;
-	}
-
-	public void setUrlImg(String urlImg) {
-		this.urlImg = urlImg;
-	}
-
-	public String getUrlTrailer() {
-		return urlTrailer;
-	}
-
-	public void setUrlTrailer(String urlTrailer) {
-		this.urlTrailer = urlTrailer;
-	}
-
-	public List<Avaliacoes> getListAvaliacoes() {
-		return listAvaliacoes;
-	}
-
-	public void setListAvaliacoes(List<Avaliacoes> listAvaliacoes) {
-		this.listAvaliacoes = listAvaliacoes;
-	}
-
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
-	}
 }

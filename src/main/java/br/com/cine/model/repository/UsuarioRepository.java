@@ -10,27 +10,13 @@ import org.mindrot.jbcrypt.BCrypt;
 import br.com.cine.model.entities.Usuario;
 import br.com.cine.model.interfaces.IUsuarioRepository;
 import br.com.cine.model.util.JPAUtil;
+import br.com.cine.model.util.TransacaoUtil;
 
 public class UsuarioRepository implements IUsuarioRepository {
 
 	@Override
 	public void cadastrarUsuario(Usuario usuario) throws SQLException {
-		EntityManager manager = JPAUtil.getEntityManager();
-		EntityTransaction transaction = manager.getTransaction();
-
-		try {
-			transaction.begin();
-			manager.persist(usuario);
-			transaction.commit();
-		} catch (Exception e) {
-			throw new SQLException(e);
-		} finally {
-			if (transaction.isActive()) {
-				transaction.rollback();
-			}
-
-			manager.close();
-		}
+		TransacaoUtil.executarTransacao(maneger -> maneger.persist(usuario));
 	}
 
 	@Override
@@ -93,44 +79,15 @@ public class UsuarioRepository implements IUsuarioRepository {
 
 	@Override
 	public void alterarUsuario(Usuario usuario) throws SQLException {
-		EntityManager manager = JPAUtil.getEntityManager();
-		EntityTransaction transaction = manager.getTransaction();
-
-		try {
-			transaction.begin();
-			manager.merge(usuario);
-			transaction.commit();
-		} catch (Exception e) {
-			throw new SQLException(e);
-		} finally {
-			if (transaction.isActive()) {
-				transaction.rollback();
-			}
-			manager.close();
-		}
+		TransacaoUtil.executarTransacao(maneger -> maneger.merge(usuario));
 	}
 
 	@Override
 	public void excluirUsuarioPeloId(Long id) throws SQLException {
-		EntityManager manager = JPAUtil.getEntityManager();
-		EntityTransaction transaction = manager.getTransaction();
-
-		Usuario usuario = null;
-
-		try {
-			transaction.begin();
-			usuario = manager.find(Usuario.class, id);
+		TransacaoUtil.executarTransacao(maneger -> {
+			Usuario usuario = maneger.find(Usuario.class, id);
 			usuario.setAtivo(false);
-			manager.merge(usuario);
-			transaction.commit();
-		} catch (Exception e) {
-			throw new SQLException(e);
-		} finally {
-			if (transaction.isActive()) {
-				transaction.rollback();
-			}
-
-			manager.close();
-		}
+			maneger.merge(usuario);
+		});
 	}
 }

@@ -31,19 +31,15 @@ public class Avaliacoes {
 	private Usuario usuario;
 
 	@ManyToOne
-	@JoinColumn(name = "series_id")
-	private Series series;
+    @JoinColumn(name = "conteudo_id")
+    private Conteudo conteudo;
 
-	@ManyToOne
-	@JoinColumn(name = "filmes_id")
-	private Filmes filmes;
-
-	public Avaliacoes(String titulo, String avaliacao, Integer classificacao, Usuario usuario, Series series) {
+	public Avaliacoes(String titulo, String avaliacao, Integer classificacao, Usuario usuario, Conteudo conteudo) {
 		this.titulo = titulo;
 		this.avaliacao = avaliacao;
 		this.classificacao = classificacao;
 		this.usuario = usuario;
-		this.series = series;
+		this.conteudo = conteudo;
 		this.ativo = true;
 	}
 
@@ -90,20 +86,12 @@ public class Avaliacoes {
 		this.usuario = usuario;
 	}
 
-	public Series getSeries() {
-		return series;
+	public Conteudo getConteudo() {
+		return conteudo;
 	}
 
-	public void setSeries(Series series) {
-		this.series = series;
-	}
-
-	public Filmes getFilmes() {
-		return filmes;
-	}
-
-	public void setFilmes(Filmes filmes) {
-		this.filmes = filmes;
+	public void setConteudo(Conteudo conteudo) {
+		this.conteudo = conteudo;
 	}
 
 	public Boolean getAtivo() {
