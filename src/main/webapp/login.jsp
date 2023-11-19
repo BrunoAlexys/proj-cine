@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<c:url value="/cine?action=LoginBean" var="login"/>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +31,7 @@
         </div>
 
         <div class="form-container sign-in-container">
-            <form action="${login}" method="post">
+            <form action="cine?action=LoginBean" method="post">
                 <h1>Entrar</h1>
                 <span>ou se escrever-se</span>
                 <input type="email" placeholder="Email" name="email" />

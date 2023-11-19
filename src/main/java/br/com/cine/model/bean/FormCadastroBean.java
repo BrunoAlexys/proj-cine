@@ -21,7 +21,7 @@ public class FormCadastroBean implements TipoAcao {
 
 	@Override
 	public void execute() throws ServletException, IOException {
-		RequestDispatcher rd = this.req.getRequestDispatcher("/test.jsp");
+		RequestDispatcher rd = this.req.getRequestDispatcher("/conteudo.jsp");
         rd.forward(this.req, this.resp);
 	}
 

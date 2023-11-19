@@ -21,6 +21,8 @@ public class CadastroUsuarioBean implements TipoAcao {
 
 	@Override
 	public void execute() throws ServletException, IOException {
+		System.out.println(1);
+		
 		String nome = req.getParameter("name");
 		String sobrenome = req.getParameter("lastName");
 		String email = req.getParameter("email");
