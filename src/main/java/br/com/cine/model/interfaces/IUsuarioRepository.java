@@ -9,6 +9,7 @@ public interface IUsuarioRepository {
 	void cadastrarUsuario(Usuario usuario) throws SQLException;
     Optional<Usuario> buscarUsuarioPorEmailESenha(String email, String senha) throws SQLException;
     Optional<Usuario> buscarUsuarioPeloID(Long id) throws SQLException;
+    Optional<Usuario> buscarEmail(String email) throws SQLException; 
     void alterarUsuario(Usuario usuario) throws SQLException;
     void excluirUsuarioPeloId(Long id) throws SQLException;
 }

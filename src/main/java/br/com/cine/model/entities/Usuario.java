@@ -1,7 +1,7 @@
 package br.com.cine.model.entities;
+
 import java.time.LocalDate;
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,33 +10,48 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "usuario_id")
+	@Column(name = "usuario_id", nullable = false)
 	private Long id;
-	@Column(name = "nome")
+
+	@Column(name = "nome", nullable = false)
+	@NotBlank(message = "O nome não pode ser vazio")
 	private String nome;
-	@Column(name = "sobrenome")
+
+	@Column(name = "sobrenome", nullable = false)
+	@NotBlank(message = "O sobrenonome não pode ser vazio")
 	private String sobrenome;
-	@Column(name = "email")
+
+	@Column(name = "email", nullable = false, unique = true)
+	@NotBlank(message = "O email não pode ser vazio")
 	private String email;
-	@Column(name = "senha")
+
+	@Column(name = "senha", nullable = false)
+	@NotNull(message = "A senha não pode ser nula")
 	private String senha;
-	@Column(name = "data_nascimento")
+
+	@Column(name = "data_nascimento", nullable = false)
+	@Past(message = "Digite uma data de nascimento valida")
 	private LocalDate dataDeNascimento;
+
 	@Column(name = "genero")
 	private String genero;
-	@Column(name = "ativo")
+
+	@Column(name = "ativo", nullable = false)
 	private Boolean ativo;
 
 	@OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
 	private List<Avaliacoes> listAvaliacoes;
-	
+
 	public Usuario(String nome, String sobrenome, String email, String senha, LocalDate dataDeNascimento,
 			String genero) {
 		this.nome = nome;
@@ -46,9 +61,10 @@ public class Usuario {
 		this.dataDeNascimento = dataDeNascimento;
 		this.genero = genero;
 		this.ativo = true;
-	}	
-	
-	public Usuario() {}
+	}
+
+	public Usuario() {
+	}
 
 	public Long getId() {
 		return id;
@@ -130,4 +146,3 @@ public class Usuario {
 	}
 
 }
-

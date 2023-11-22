@@ -32,11 +32,33 @@ public class ConteudoRepository implements IConteudoRepository {
 			return manager.createQuery("from Filmes f where f.ativo = true", Filmes.class).getResultList();
 		});
 	}
-
+	
+	@Override
+	public List<Filmes> listarTop10Filmes() throws SQLException {
+		return TransacaoUtil.executarTransacaoComRetorno(maneger -> {
+			return maneger.createQuery("SELECT DISTINCT f FROM Filmes f " +
+										"JOIN f.listAvaliacoes a " +
+										"GROUP BY f " +
+										"ORDER BY AVG(a.classificacao) DESC " +
+										"LIMIT 10 ", Filmes.class).getResultList();
+		});
+	}
+		
 	@Override
 	public List<Series> listarSeries() throws SQLException {
 		return TransacaoUtil.executarTransacaoComRetorno(manager -> {
 			return manager.createQuery("from Series s where s.ativo = true", Series.class).getResultList();
+		});
+	}
+	
+	@Override
+	public List<Series> listarTop10Series() throws SQLException {
+		return TransacaoUtil.executarTransacaoComRetorno(maneger -> {
+			return maneger.createQuery("SELECT DISTINCT s FROM Series s " +
+									   "JOIN s.listAvaliacoes a " +
+									   "GROUP BY s " +
+									   "ORDER BY AVG(a.classificacao) DESC " +
+									   "LIMIT 10", Series.class).getResultList();
 		});
 	}
 

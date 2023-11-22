@@ -5,8 +5,6 @@ import java.util.Optional;
 
 import br.com.cine.model.entities.Avaliacoes;
 import br.com.cine.model.entities.Conteudo;
-import br.com.cine.model.entities.Filmes;
-import br.com.cine.model.entities.Series;
 import br.com.cine.model.entities.Usuario;
 import br.com.cine.model.repository.AvaliacoesRepository;
 import br.com.cine.model.validation.ValidarAvaliacao;
@@ -14,7 +12,7 @@ import br.com.cine.model.validation.ValidarAvaliacao;
 public class AvaliacaoService {
 
 	private UsuarioService usuarioService = new UsuarioService();
-	ConteudoService conteudoService = new ConteudoService();
+	private ConteudoService conteudoService = new ConteudoService();
 	private AvaliacoesRepository avaliacoesRepository = new AvaliacoesRepository();
 
 	public void cadastrarAvaliacao(String titulo, String avaliacao, Integer classificacao, Long usuarioID,

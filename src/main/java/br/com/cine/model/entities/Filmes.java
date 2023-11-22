@@ -36,4 +36,9 @@ public class Filmes extends Conteudo {
 		return "Filmes";
 	}
 
+	@Override
+	public String toString() {
+		return "Filmes [duracao=" + duracao + "]";
+	}
+	
 }

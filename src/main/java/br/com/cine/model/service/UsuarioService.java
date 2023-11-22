@@ -8,13 +8,19 @@ import br.com.cine.model.validation.ValidarUsuario;
 
 public class UsuarioService {
 	private UsuarioRepository usuarioRepository;
-
+	
 	public UsuarioService() {
 		this.usuarioRepository = new UsuarioRepository();
 	}
 
 	public void cadastrarUsuario(Usuario usuario) throws Exception, SQLException {
-
+		
+		Optional<Usuario> usuarioEncontrado = usuarioRepository.buscarEmail(usuario.getEmail());
+		
+		usuarioEncontrado.ifPresent(usuarioExistente -> {
+	        throw new IllegalArgumentException("Não é possível cadastrar esse email");
+	    });
+		
 		String senhaHash = EncriptarSenha.encriptarSenha(usuario.getSenha());
 		usuario.setSenha(senhaHash);
 		ValidarUsuario.validarUsuario(usuario);

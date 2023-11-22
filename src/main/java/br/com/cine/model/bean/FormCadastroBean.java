@@ -1,8 +1,6 @@
 package br.com.cine.model.bean;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,8 +19,7 @@ public class FormCadastroBean implements TipoAcao {
 
 	@Override
 	public void execute() throws ServletException, IOException {
-		RequestDispatcher rd = this.req.getRequestDispatcher("/conteudo.jsp");
-        rd.forward(this.req, this.resp);
+		this.resp.sendRedirect("conteudo.jsp");
 	}
 
 }

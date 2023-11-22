@@ -45,7 +45,7 @@
 		<br>
 		<div id="duracaoDiv">
 			<label for="duracao">Duração:</label>
-        	<input type="number" name="duracao" required>
+        	<input type="number" name="duracao">
     	</div>
     	
     	<br/>

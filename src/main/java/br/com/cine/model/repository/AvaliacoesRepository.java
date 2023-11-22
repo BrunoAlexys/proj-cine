@@ -2,16 +2,9 @@ package br.com.cine.model.repository;
 
 import java.sql.SQLException;
 import java.util.Optional;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-
 import br.com.cine.model.entities.Avaliacoes;
-import br.com.cine.model.entities.Conteudo;
 import br.com.cine.model.interfaces.IAvaliacoesRepository;
-import br.com.cine.model.util.JPAUtil;
 import br.com.cine.model.util.TransacaoUtil;
-import net.bytebuddy.asm.Advice.Return;
 
 public class AvaliacoesRepository implements IAvaliacoesRepository {
 

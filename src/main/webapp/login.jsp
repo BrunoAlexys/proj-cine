@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>	
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,6 +11,7 @@
     <title>Login</title>
 </head>
 <body>
+	<div class="container" id="container">
     <div class="container" id="container">
         <div class="form-container sign-up-container">
             <form action="cine?action=CadastroUsuarioBean" method="post">
@@ -26,6 +28,7 @@
                     <option value="feminino">Feminino</option>
                     <option value="outros">Outros</option>
                 </select>
+               
                 <button type="submit">Inscrever-se</button>
             </form>
         </div>
@@ -33,7 +36,7 @@
         <div class="form-container sign-in-container">
             <form action="cine?action=LoginBean" method="post">
                 <h1>Entrar</h1>
-                <span>ou se escrever-se</span>
+                <span>ou se inscrever-se</span>
                 <input type="email" placeholder="Email" name="email" />
                 <input type="password" placeholder="Password" name="password" />
                 <a href="cine?action=RecuperarSenhaEmailBean">Esqueceu a senha?</a>

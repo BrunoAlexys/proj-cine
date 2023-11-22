@@ -12,14 +12,18 @@ public class ValidarUsuario {
 	}
 
 	public static Boolean validarUsuario(Usuario usuario) {
-		if (usuario.getNome().isEmpty()) {
-			throw new IllegalArgumentException("Nome não pode ser vazio");
-		}
+//		if (usuario.getNome().isEmpty()) {
+//			throw new IllegalArgumentException("Nome não pode ser vazio");
+//		}
 
 		validarEmailESenha(usuario.getEmail(), usuario.getSenha());
 
 		if (usuario.getDataDeNascimento() == null) {
 			throw new IllegalArgumentException("Data de nascimento não pode ser vazia");
+		}
+		
+		if(usuario.getGenero().isEmpty()) {
+			throw new IllegalArgumentException("Gênero não pode estar vazio");
 		}
 
 		return true;

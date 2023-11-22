@@ -3,7 +3,6 @@ package br.com.cine.model.util;
 import java.sql.SQLException;
 import java.util.function.Consumer;
 import java.util.function.Function;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 

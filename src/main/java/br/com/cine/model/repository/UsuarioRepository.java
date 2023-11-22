@@ -2,8 +2,10 @@ package br.com.cine.model.repository;
 
 import java.sql.SQLException;
 import java.util.Optional;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -75,6 +77,19 @@ public class UsuarioRepository implements IUsuarioRepository {
 		}
 
 		return Optional.ofNullable(usuario);
+	}
+	
+	@Override
+	public Optional<Usuario> buscarEmail(String email) throws SQLException {
+		return TransacaoUtil.executarTransacaoComRetorno(manager -> {
+	        try {
+	            return Optional.of(
+	                    manager.createQuery("from Usuario u where u.email = :email and u.ativo = true", Usuario.class)
+	                            .setParameter("email", email).getSingleResult());
+	        } catch (NoResultException e) {
+	            return Optional.empty();
+	        }
+	    });
 	}
 
 	@Override

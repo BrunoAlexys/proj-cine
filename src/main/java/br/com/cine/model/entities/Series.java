@@ -21,7 +21,8 @@ public class Series extends Conteudo {
 		this.temporadas = temporadas;
 	}
 
-	public Series() {}
+	public Series() {
+	}
 
 	public Integer getTemporadas() {
 		return temporadas;
@@ -35,4 +36,10 @@ public class Series extends Conteudo {
 	protected String definirTipoConteudo() {
 		return "Series";
 	}
+
+	@Override
+	public String toString() {
+		return "Series [temporadas=" + temporadas + "]";
+	}
+
 }

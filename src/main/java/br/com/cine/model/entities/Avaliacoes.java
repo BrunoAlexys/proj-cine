@@ -1,4 +1,5 @@
 package br.com.cine.model.entities;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "avaliacoes")
 public class Avaliacoes {
@@ -17,12 +17,16 @@ public class Avaliacoes {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "avaliacoes_id")
 	private Long id;
+
 	@Column(name = "titulo")
 	private String titulo;
+
 	@Column(name = "avaliacoes")
 	private String avaliacao;
+
 	@Column(name = "classificacao")
 	private Integer classificacao;
+
 	@Column(name = "ativo")
 	private Boolean ativo = true;
 
@@ -31,8 +35,8 @@ public class Avaliacoes {
 	private Usuario usuario;
 
 	@ManyToOne
-    @JoinColumn(name = "conteudo_id")
-    private Conteudo conteudo;
+	@JoinColumn(name = "conteudo_id")
+	private Conteudo conteudo;
 
 	public Avaliacoes(String titulo, String avaliacao, Integer classificacao, Usuario usuario, Conteudo conteudo) {
 		this.titulo = titulo;
@@ -102,7 +106,10 @@ public class Avaliacoes {
 		this.ativo = ativo;
 	}
 
+	@Override
+	public String toString() {
+		return "Avaliacoes [id=" + id + ", titulo=" + titulo + ", avaliacao=" + avaliacao + ", classificacao="
+				+ classificacao + ", ativo=" + ativo + ", usuario=" + usuario + ", conteudo=" + conteudo + "]";
+	}
+
 }
-
-
-

@@ -1,6 +1,7 @@
 package br.com.cine.model.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -50,6 +52,10 @@ public abstract class Conteudo {
 
 	@Column(name = "tipo_conteudo", insertable = false, updatable = false)
 	private String tipoConteudo;
+	
+	@Column(name = "avaliacao_id")
+	@OneToMany
+	private List<Avaliacoes> listAvaliacoes;
 
 	public Conteudo(String titulo, String descricao, String diretor, String genero, LocalDate dataDeLancamento,
 			String urlImg, String urlTrailer) {
