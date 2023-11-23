@@ -2,12 +2,11 @@ package br.com.cine.model.service;
 
 import java.sql.SQLException;
 import java.util.Optional;
-
 import br.com.cine.model.entities.Avaliacoes;
 import br.com.cine.model.entities.Conteudo;
 import br.com.cine.model.entities.Usuario;
 import br.com.cine.model.repository.AvaliacoesRepository;
-import br.com.cine.model.validation.ValidarAvaliacao;
+
 
 public class AvaliacaoService {
 
@@ -26,8 +25,6 @@ public class AvaliacaoService {
 
 			Avaliacoes avaliacoes = new Avaliacoes();
 
-			ValidarAvaliacao.validarAvaliacao(avaliacoes);
-
 			avaliacoesRepository.salvarAvaliacao(avaliacoes);
 		} else {
 			throw new SQLException("Não foi encontrado nenhum conteudo");
@@ -39,7 +36,6 @@ public class AvaliacaoService {
 	}
 
 	public void alterarAvaliacao(Avaliacoes avaliacoes) throws SQLException {
-		ValidarAvaliacao.validarAvaliacao(avaliacoes);
 		avaliacoesRepository.atualizarAvaliacao(avaliacoes);
 	}
 

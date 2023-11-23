@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.Optional;
 import br.com.cine.model.entities.Usuario;
 import br.com.cine.model.repository.UsuarioRepository;
-import br.com.cine.model.validation.ValidarUsuario;
 
 public class UsuarioService {
 	private UsuarioRepository usuarioRepository;
@@ -23,12 +22,10 @@ public class UsuarioService {
 		
 		String senhaHash = EncriptarSenha.encriptarSenha(usuario.getSenha());
 		usuario.setSenha(senhaHash);
-		ValidarUsuario.validarUsuario(usuario);
 		usuarioRepository.cadastrarUsuario(usuario);
 	}
 
 	public Optional<Usuario> buscarUsuarioPorEmailESenha(String email, String senha) throws Exception, SQLException {
-		ValidarUsuario.validarEmailESenha(email, senha);
 		return usuarioRepository.buscarUsuarioPorEmailESenha(email, senha);
 	}
 
@@ -39,7 +36,6 @@ public class UsuarioService {
 	public void alterarUsuario(Usuario usuario) throws Exception {
 		String senhaHash = EncriptarSenha.encriptarSenha(usuario.getSenha());
 		usuario.setSenha(senhaHash);
-		ValidarUsuario.validarUsuario(usuario);
 		usuarioRepository.alterarUsuario(usuario);
 	}
 
