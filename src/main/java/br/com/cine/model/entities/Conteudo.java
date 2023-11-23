@@ -81,6 +81,14 @@ public abstract class Conteudo {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	public String getTipoConteudo() {
+	    return tipoConteudo;
+	}
+
+	public void setTipoConteudo(String tipoConteudo) {
+	    this.tipoConteudo = tipoConteudo;
+	}
 
 	public String getTitulo() {
 		return titulo;

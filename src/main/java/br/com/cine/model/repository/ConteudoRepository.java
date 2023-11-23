@@ -25,7 +25,14 @@ public class ConteudoRepository implements IConteudoRepository {
 							.setParameter("id", id).getSingleResult());
 		});
 	}
-
+	
+	@Override
+	public List<Conteudo> listarConteudos() throws SQLException {
+		return TransacaoUtil.executarTransacaoComRetorno(manager -> {
+			return manager.createQuery("from Conteudo c where c.ativo = true", Conteudo.class).getResultList();
+		});
+	}
+ 
 	@Override
 	public List<Filmes> listarFilmes() throws SQLException {
 		return TransacaoUtil.executarTransacaoComRetorno(manager -> {

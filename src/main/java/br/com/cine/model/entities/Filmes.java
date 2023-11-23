@@ -22,6 +22,11 @@ public class Filmes extends Conteudo {
 	}
 
 	public Filmes() {}
+	
+	@Override
+	protected String definirTipoConteudo() {
+		return "Filmes";
+	}
 
 	public Integer getDuracao() {
 		return duracao;
@@ -29,11 +34,6 @@ public class Filmes extends Conteudo {
 
 	public void setDuracao(Integer duracao) {
 		this.duracao = duracao;
-	}
-
-	@Override
-	protected String definirTipoConteudo() {
-		return "Filmes";
 	}
 
 	@Override

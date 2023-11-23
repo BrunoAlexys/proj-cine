@@ -1,0 +1,53 @@
+@charset "ISO-8859-1";
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+header {
+    background-color: #000;
+    color: white;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#logo {
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+}
+
+#brand {
+    display: flex;
+    align-items: center;
+}
+
+#brand h1 {
+    margin-left: 10px;
+}
+
+.user-icon {
+    margin-left: 10px;
+}
+
+.btn-cadastrar {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-cadastrar:active {
+    transform: scale(0.95);
+}
+
+.btn-cadastrar:focus {
+    outline: none;
+}

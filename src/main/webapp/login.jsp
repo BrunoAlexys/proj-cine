@@ -14,7 +14,7 @@
 	<div class="container" id="container">
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form action="cine?action=CadastroUsuarioBean" method="post">
+            <form id="form" action="cine?action=CadastroUsuarioBean" method="post">
                 <h1>Criar uma conta</h1>
                 <span>ou use seu e-mail para cadastro</span>
                 <input type="text" placeholder="First name" name="name" />

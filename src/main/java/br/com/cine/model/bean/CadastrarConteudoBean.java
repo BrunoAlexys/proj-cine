@@ -2,11 +2,9 @@ package br.com.cine.model.bean;
 
 import java.io.IOException;
 import java.time.LocalDate;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import br.com.cine.controller.TipoAcao;
 import br.com.cine.model.entities.Conteudo;
 import br.com.cine.model.entities.Filmes;

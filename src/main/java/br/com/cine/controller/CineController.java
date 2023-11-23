@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(urlPatterns = "/cine")
 public class CineController extends HttpServlet{
@@ -17,6 +18,15 @@ private static final long serialVersionUID = 1L;
     @Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
+        
+        HttpSession session = req.getSession();
+		boolean isLogado = session.getAttribute("usuarioLogado") == null;
+		boolean isProtected = !(action.equalsIgnoreCase("LoginBean") || action.equalsIgnoreCase("LoginFormBean"));
+
+		if (isLogado && isProtected) {
+			resp.sendRedirect("cine?action=LoginFormBean");
+			return;
+		}
         
         String fqn = null;
         System.out.println(action);

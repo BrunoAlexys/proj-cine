@@ -1,8 +1,10 @@
 package br.com.cine.model.service;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 import br.com.cine.model.entities.Conteudo;
+import br.com.cine.model.entities.Filmes;
 import br.com.cine.model.repository.ConteudoRepository;
 
 public class ConteudoService {
@@ -20,8 +22,12 @@ public class ConteudoService {
 		return conteudoRepository.buscarPeloID(id);
 	}
 	
-	public void listarFilmes() throws SQLException {
-		conteudoRepository.listarFilmes();
+	public List<Conteudo> listarConteudo() throws SQLException {
+		return conteudoRepository.listarConteudos();
+	}
+	
+	public List<Filmes> listarFilmes() throws SQLException {
+		return conteudoRepository.listarFilmes();
 	}
 	
 	public void listarSeries()throws SQLException {

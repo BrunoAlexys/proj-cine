@@ -10,6 +10,7 @@ import br.com.cine.model.entities.Series;
 public interface IConteudoRepository {
 	void cadastrar(Conteudo conteudo) throws SQLException;
     Optional<Conteudo> buscarPeloID(long id) throws SQLException;
+    List<Conteudo> listarConteudos() throws SQLException;
     List<Filmes> listarFilmes() throws SQLException;
     List<Filmes> listarTop10Filmes() throws SQLException;
     List<Series> listarSeries() throws SQLException;
