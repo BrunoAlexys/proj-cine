@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "avaliacoes")
@@ -19,15 +21,19 @@ public class Avaliacoes {
 	private Long id;
 
 	@Column(name = "titulo")
+	@NotBlank(message = "O campo titulo não pode ser vazio")
 	private String titulo;
 
 	@Column(name = "avaliacoes")
+	@NotBlank(message = "O campo de avaliação não pode ser vazio")
 	private String avaliacao;
 
 	@Column(name = "classificacao")
+	@NotNull(message = "O campo de classificação não pode ser nulo")
 	private Integer classificacao;
 
 	@Column(name = "ativo")
+	@NotNull(message = "O campo ativo não pode ser nulo")
 	private Boolean ativo = true;
 
 	@ManyToOne

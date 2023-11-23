@@ -19,14 +19,14 @@ private static final long serialVersionUID = 1L;
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
         
-        HttpSession session = req.getSession();
-		boolean isLogado = session.getAttribute("usuarioLogado") == null;
-		boolean isProtected = !(action.equalsIgnoreCase("LoginBean") || action.equalsIgnoreCase("LoginFormBean"));
-
-		if (isLogado && isProtected) {
-			resp.sendRedirect("cine?action=LoginFormBean");
-			return;
-		}
+//        HttpSession session = req.getSession();
+//		boolean isLogado = session.getAttribute("usuarioLogado") == null;
+//		boolean isProtected = !(action.equalsIgnoreCase("LoginBean") || action.equalsIgnoreCase("LoginFormBean"));
+//
+//		if (isLogado && isProtected) {
+//			resp.sendRedirect("cine?action=LoginFormBean");
+//			return;
+//		}
         
         String fqn = null;
         System.out.println(action);

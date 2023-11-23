@@ -14,6 +14,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "conteudos")
@@ -27,12 +29,15 @@ public abstract class Conteudo {
 	private Long id;
 
 	@Column(name = "titulo")
+	@NotBlank(message = "O campo titulo não pode ser vazio")
 	private String titulo;
 
 	@Column(name = "descricao")
+	@NotBlank(message = "O campo descrição não pode ser vazio")
 	private String descricao;
 
 	@Column(name = "diretor")
+	@NotBlank(message = "O campo diretor não pode ser vazio")
 	private String diretor;
 
 	@Column(name = "genero")
@@ -42,15 +47,19 @@ public abstract class Conteudo {
 	private LocalDate dataDeLancamento;
 
 	@Column(name = "url_img")
+	@NotBlank(message = "O campo de url de imagem não pode ser vazio")
 	private String urlImg;
 
 	@Column(name = "url_trailer")
+	@NotBlank(message = "O campo de url do trailer não pode ser vazio")
 	private String urlTrailer;
 
 	@Column(name = "ativo")
+	@NotNull(message = "O campo ativo não pode ser nulo")
 	private Boolean ativo;
 
 	@Column(name = "tipo_conteudo", insertable = false, updatable = false)
+	@NotBlank(message = "O campo de tipo de conteudo não pode ser vazio")
 	private String tipoConteudo;
 	
 	@Column(name = "avaliacao_id")
