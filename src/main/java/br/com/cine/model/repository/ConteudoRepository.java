@@ -3,10 +3,7 @@ package br.com.cine.model.repository;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
-
 import br.com.cine.model.entities.Conteudo;
-import br.com.cine.model.entities.Filmes;
-import br.com.cine.model.entities.Series;
 import br.com.cine.model.interfaces.IConteudoRepository;
 import br.com.cine.model.util.TransacaoUtil;
 
@@ -29,43 +26,43 @@ public class ConteudoRepository implements IConteudoRepository {
 	@Override
 	public List<Conteudo> listarConteudos() throws SQLException {
 		return TransacaoUtil.executarTransacaoComRetorno(manager -> {
-			return manager.createQuery("from Conteudo c where c.ativo = true", Conteudo.class).getResultList();
+			return manager.createQuery("select c from Conteudo c where c.ativo = true", Conteudo.class).getResultList();
 		});
 	}
  
 	@Override
-	public List<Filmes> listarFilmes() throws SQLException {
+	public List<Conteudo> listarFilmes() throws SQLException {
 		return TransacaoUtil.executarTransacaoComRetorno(manager -> {
-			return manager.createQuery("from Filmes f where f.ativo = true", Filmes.class).getResultList();
+			return manager.createQuery("from Filmes f where f.ativo = true", Conteudo.class).getResultList();
 		});
 	}
 	
 	@Override
-	public List<Filmes> listarTop10Filmes() throws SQLException {
+	public List<Conteudo> listarTop10Filmes() throws SQLException {
 		return TransacaoUtil.executarTransacaoComRetorno(maneger -> {
 			return maneger.createQuery("SELECT DISTINCT f FROM Filmes f " +
 										"JOIN f.listAvaliacoes a " +
 										"GROUP BY f " +
 										"ORDER BY AVG(a.classificacao) DESC " +
-										"LIMIT 10 ", Filmes.class).getResultList();
+										"LIMIT 10 ", Conteudo.class).getResultList();
 		});
 	}
 		
 	@Override
-	public List<Series> listarSeries() throws SQLException {
+	public List<Conteudo> listarSeries() throws SQLException {
 		return TransacaoUtil.executarTransacaoComRetorno(manager -> {
-			return manager.createQuery("from Series s where s.ativo = true", Series.class).getResultList();
+			return manager.createQuery("from Series s where s.ativo = true", Conteudo.class).getResultList();
 		});
 	}
 	
 	@Override
-	public List<Series> listarTop10Series() throws SQLException {
+	public List<Conteudo> listarTop10Series() throws SQLException {
 		return TransacaoUtil.executarTransacaoComRetorno(maneger -> {
 			return maneger.createQuery("SELECT DISTINCT s FROM Series s " +
 									   "JOIN s.listAvaliacoes a " +
 									   "GROUP BY s " +
 									   "ORDER BY AVG(a.classificacao) DESC " +
-									   "LIMIT 10", Series.class).getResultList();
+									   "LIMIT 10", Conteudo.class).getResultList();
 		});
 	}
 

@@ -6,8 +6,6 @@
 	<persistence-unit name="cine">
 		<class>br.com.cine.model.entities.Usuario</class>
 		<class>br.com.cine.model.entities.Conteudo</class>
-		<class>br.com.cine.model.entities.Series</class>
-		<class>br.com.cine.model.entities.Filmes</class>
 		<class>br.com.cine.model.entities.Avaliacoes</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver"

@@ -4,14 +4,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -19,9 +15,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "conteudos")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipo_conteudo", discriminatorType = DiscriminatorType.STRING)
-public abstract class Conteudo {
+public class Conteudo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,6 +33,12 @@ public abstract class Conteudo {
 	@Column(name = "diretor")
 	@NotBlank(message = "O campo diretor não pode ser vazio")
 	private String diretor;
+
+	@Column(name = "duracao")
+	private Integer duracao;
+
+	@Column(name = "temporadas")
+	private Integer temporadas;
 
 	@Column(name = "genero")
 	private String genero;
@@ -58,30 +58,43 @@ public abstract class Conteudo {
 	@NotNull(message = "O campo ativo não pode ser nulo")
 	private Boolean ativo;
 
-	@Column(name = "tipo_conteudo", insertable = false, updatable = false)
-	@NotBlank(message = "O campo de tipo de conteudo não pode ser vazio")
-	private String tipoConteudo;
-	
+	@Column(name = "tipo_conteudo")
+	//@NotBlank(message = "O campo de tipo de conteudo não pode ser vazio")
+	//@Enumerated(EnumType.STRING)
+	private TipoConteudo tipoConteudo;
+
 	@Column(name = "avaliacao_id")
 	@OneToMany
 	private List<Avaliacoes> listAvaliacoes;
 
-	public Conteudo(String titulo, String descricao, String diretor, String genero, LocalDate dataDeLancamento,
-			String urlImg, String urlTrailer) {
+	public Conteudo(String titulo, String descricao, String diretor, Integer duracao, Integer temporadas, String genero,
+			LocalDate dataDeLancamento, String urlImg, String urlTrailer, TipoConteudo tipoConteudo) {
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.diretor = diretor;
+		this.duracao = duracao;
+		this.temporadas = temporadas;
 		this.genero = genero;
 		this.dataDeLancamento = dataDeLancamento;
 		this.urlImg = urlImg;
 		this.urlTrailer = urlTrailer;
 		this.ativo = true;
-		this.tipoConteudo = definirTipoConteudo();
+		this.tipoConteudo = tipoConteudo;
 	}
-
-	public Conteudo() {}
 	
-	protected abstract String definirTipoConteudo();
+//	public Conteudo(ConteudoDTO dados) {
+//		this.titulo = dados.titulo();
+//		this.diretor = dados.diretor();
+//		this.temporadas = dados.temporadas();
+//		this.duracao = dados.duracao();
+//		this.genero = dados.genero();
+//		this.dataDeLancamento = dados.dataDeLancamento();
+//		this.urlImg = dados.urlImg();
+//		this.urlTrailer = dados.urlTrailer();
+//	}
+
+	public Conteudo() {
+	}
 
 	public Long getId() {
 		return id;
@@ -90,13 +103,13 @@ public abstract class Conteudo {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	public String getTipoConteudo() {
-	    return tipoConteudo;
+
+	public TipoConteudo getTipoConteudo() {
+		return tipoConteudo;
 	}
 
-	public void setTipoConteudo(String tipoConteudo) {
-	    this.tipoConteudo = tipoConteudo;
+	public void setTipoConteudo(TipoConteudo tipoConteudo) {
+		this.tipoConteudo = tipoConteudo;
 	}
 
 	public String getTitulo() {
@@ -109,6 +122,30 @@ public abstract class Conteudo {
 
 	public String getDescricao() {
 		return descricao;
+	}
+
+	public Integer getDuracao() {
+		return duracao;
+	}
+
+	public void setDuracao(Integer duracao) {
+		this.duracao = duracao;
+	}
+
+	public Integer getTemporadas() {
+		return temporadas;
+	}
+
+	public void setTemporadas(Integer temporadas) {
+		this.temporadas = temporadas;
+	}
+
+	public List<Avaliacoes> getListAvaliacoes() {
+		return listAvaliacoes;
+	}
+
+	public void setListAvaliacoes(List<Avaliacoes> listAvaliacoes) {
+		this.listAvaliacoes = listAvaliacoes;
 	}
 
 	public String getDiretor() {
@@ -165,7 +202,9 @@ public abstract class Conteudo {
 
 	@Override
 	public String toString() {
-		return "Conteudo [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", genero=" + genero
-				+ ", urlImg=" + urlImg + ", urlTrailer=" + urlTrailer + ", ativo=" + ativo + "]";
+		return "Conteudo [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", diretor=" + diretor
+				+ ", duracao=" + duracao + ", temporadas=" + temporadas + ", genero=" + genero + ", dataDeLancamento="
+				+ dataDeLancamento + ", urlImg=" + urlImg + ", urlTrailer=" + urlTrailer + ", ativo=" + ativo
+				+ ", tipoConteudo=" + tipoConteudo + " ]";
 	}
 }

@@ -2,13 +2,14 @@ package br.com.cine.model.bean;
 
 import java.io.IOException;
 import java.time.LocalDate;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import br.com.cine.controller.TipoAcao;
 import br.com.cine.model.entities.Conteudo;
-import br.com.cine.model.entities.Filmes;
-import br.com.cine.model.entities.Series;
+import br.com.cine.model.entities.TipoConteudo;
 import br.com.cine.model.service.ConteudoService;
 
 public class CadastrarConteudoBean implements TipoAcao {
@@ -33,22 +34,23 @@ public class CadastrarConteudoBean implements TipoAcao {
 		String temporadas = this.req.getParameter("temporadas");
 		String urlImg = this.req.getParameter("urlImg");
 		String urlTrailer = this.req.getParameter("urlTrailer");
-		
+
 		LocalDate data = LocalDate.parse(dataDeLancamento);
-		
-		if (tipo.equalsIgnoreCase("Filmes")) {
-			Integer duracaoParse = Integer.parseInt(duracao);
-			var filmes = new Filmes(titulo, descricao, diretor, genero, data, urlImg, urlTrailer, duracaoParse);
-			cadastrar(filmes);
-		} else if (tipo.equalsIgnoreCase("Series")) {
-			Integer temporadasParse = Integer.parseInt(temporadas);
-			var series = new Series(titulo, descricao, diretor, genero, data, urlImg, urlTrailer, temporadasParse);
-			cadastrar(series);
-		} else {
-			throw new IllegalArgumentException("Nenhum tipo foi encontrado");
+		Integer duracaoParse = Integer.parseInt(duracao);
+		Integer temporadasParse = Integer.parseInt(temporadas);
+
+		try {
+			TipoConteudo tipoConteudoEnum = TipoConteudo.buscarPorDescricao(tipo);
+
+			var conteudo = new Conteudo(titulo, descricao, diretor, duracaoParse, temporadasParse, genero, data, urlImg,
+					urlTrailer, tipoConteudoEnum);
+			
+			cadastrar(conteudo);
+
+			this.resp.sendRedirect("cine?action=LoginFormBean");
+		} catch (IllegalArgumentException e) {
+			System.out.println("Erro: " + e.getMessage());
 		}
-		
-		this.resp.sendRedirect("cine?action=LoginFormBean");
 
 	}
 
