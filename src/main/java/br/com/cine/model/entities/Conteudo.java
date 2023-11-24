@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -59,8 +61,6 @@ public class Conteudo {
 	private Boolean ativo;
 
 	@Column(name = "tipo_conteudo")
-	//@NotBlank(message = "O campo de tipo de conteudo não pode ser vazio")
-	//@Enumerated(EnumType.STRING)
 	private TipoConteudo tipoConteudo;
 
 	@Column(name = "avaliacao_id")

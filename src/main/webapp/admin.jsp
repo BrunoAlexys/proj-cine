@@ -3,7 +3,7 @@
 <%@ page import="java.util.List, br.com.cine.model.entities.Conteudo"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<c:url value="/livros?acao=ListarConteudoBean" var="listarConteudo" />
+<c:url value="/cine?action=ListarConteudoBean" var="conteudo" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,9 +36,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${listarConteudo}" var="conteudo">
+                   <c:forEach items="${conteudo}" var="conteudo">
 					    <tr>
-					        <td>${conteudo.tipoConteudo}</td>
+					        <td>${conteudo.tipoConteudo.descricao}</td>
 					        <td>${conteudo.titulo}</td>
 					        <td>${conteudo.descricao}</td>
 					        <td>${conteudo.duracao}</td>
@@ -51,6 +51,7 @@
 					        </td>
 					    </tr>
 					</c:forEach>
+
                     </tbody>
                 </table>
             </div>
