@@ -18,7 +18,7 @@ public class ConteudoRepository implements IConteudoRepository {
 	public Optional<Conteudo> buscarPeloID(long id) throws SQLException {
 		return TransacaoUtil.executarTransacaoComRetorno(manager -> {
 			return Optional.ofNullable(
-					manager.createQuery("from Conteudo c where c.id = :id and c.ativo = true", Conteudo.class)
+					manager.createQuery("select c from Conteudo c where c.id = :id and c.ativo = true", Conteudo.class)
 							.setParameter("id", id).getSingleResult());
 		});
 	}
@@ -33,16 +33,16 @@ public class ConteudoRepository implements IConteudoRepository {
 	@Override
 	public List<Conteudo> listarFilmes() throws SQLException {
 		return TransacaoUtil.executarTransacaoComRetorno(manager -> {
-			return manager.createQuery("from Filmes f where f.ativo = true", Conteudo.class).getResultList();
+			return manager.createQuery("select c from Conteudo c where c.ativo = true", Conteudo.class).getResultList();
 		});
 	}
 	
 	@Override
 	public List<Conteudo> listarTop10Filmes() throws SQLException {
 		return TransacaoUtil.executarTransacaoComRetorno(maneger -> {
-			return maneger.createQuery("SELECT DISTINCT f FROM Filmes f " +
-										"JOIN f.listAvaliacoes a " +
-										"GROUP BY f " +
+			return maneger.createQuery("SELECT DISTINCT c FROM Conteudo c " +
+										"JOIN c.listAvaliacoes a " +
+										"GROUP BY c " +
 										"ORDER BY AVG(a.classificacao) DESC " +
 										"LIMIT 10 ", Conteudo.class).getResultList();
 		});
@@ -51,16 +51,16 @@ public class ConteudoRepository implements IConteudoRepository {
 	@Override
 	public List<Conteudo> listarSeries() throws SQLException {
 		return TransacaoUtil.executarTransacaoComRetorno(manager -> {
-			return manager.createQuery("from Series s where s.ativo = true", Conteudo.class).getResultList();
+			return manager.createQuery("select c from Conteudo c where c.ativo = true", Conteudo.class).getResultList();
 		});
 	}
 	
 	@Override
 	public List<Conteudo> listarTop10Series() throws SQLException {
 		return TransacaoUtil.executarTransacaoComRetorno(maneger -> {
-			return maneger.createQuery("SELECT DISTINCT s FROM Series s " +
-									   "JOIN s.listAvaliacoes a " +
-									   "GROUP BY s " +
+			return maneger.createQuery("SELECT DISTINCT c FROM Conteudo c " +
+									   "JOIN c.listAvaliacoes a " +
+									   "GROUP BY c " +
 									   "ORDER BY AVG(a.classificacao) DESC " +
 									   "LIMIT 10", Conteudo.class).getResultList();
 		});
